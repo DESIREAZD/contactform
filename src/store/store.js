@@ -1,6 +1,8 @@
+import Vue from 'vue'
 import Vuex from 'vuex'
-export default new Vuex.Store({
-    state:{
+Vue.use(Vuex)
+
+  const  state={
         users: [
             {
                 "id": 1,
@@ -15,22 +17,21 @@ export default new Vuex.Store({
                 "phone": "+2565655965",
             }
         ]
-    },
-    mutations:{
+    }
+  const mutations={
         ADD_ITEM (state, item) {
             state.users.unshift(item)
         },
-    },
-    action:{
+    }
+  const action ={
         addItem ({ commit }, item) {
             commit('ADD_ITEM', Object.assign(item))
 
         },
-    },
-    getters:{
-
-    },
-    module:{
-
     }
+    
+export default new Vuex.Store({
+    state,
+    action,
+    mutations
 })

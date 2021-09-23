@@ -6,7 +6,7 @@ import Vuesax from 'vuesax'
 import { Plugin } from 'vue-fragment'
 import VueTelInput from 'vue-tel-input';
 import 'vue-tel-input/dist/vue-tel-input.css';
-
+import store from './store/store'
 
 Vue.use(VueTelInput);
 Vue.use(Plugin)
@@ -23,5 +23,6 @@ Vue.use(Vuesax, {
   }})
 
 new Vue({
+  store,
   render: h => h(App),
 }).$mount('#app')
