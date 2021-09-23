@@ -17,12 +17,12 @@
 
       </div>
       <div class="flex flex-wrap items-center p-3" slot="footer">
-        <vs-button type="filled" icon="done"  @click="submit" color="success" >Submit</vs-button>
+        <vs-button type="filled" icon="done" :disabled="!validate"   @click="submit" color="success" >Submit</vs-button>
         <vs-button type="filled"  icon="cancel" class="ml-4"   @click="resetData" color="danger">Cancel</vs-button>
       </div>
     </div>
     <div>
-      <vs-table max-items="3" pagination search :data="users">
+      <vs-table max-items="3" pagination search :data="Users">
         <template slot="header">
           <h3>
             Contacts
@@ -62,47 +62,21 @@ export default {
       firstname: '',
       lastname: '',
       phone: '',
-      list: [],
-      users:[
-        {
-          "id": 1,
-          "firstname": "Bret",
-          "lastname": "Sincere@april.biz",
-          "phone": "+2565655965",
-        },
-        {
-          "id": 2,
-          "firstname": "Antonette",
-          "lastname": "Shanna@melissa.tv",
-          "phone": "+268859889",
-        },
-        {
-          "id": 3,
-          "firstname": "Samantha",
-          "lastname": "Nathan@yesenia.net",
-          "phone": "+2588688956",
-        },
-        {
-          "id": 4,
-          "firstname": "Karianne",
-          "lastname": "Julianne.OConner@kory.org",
-          "phone": "+2549782986",
-        },
-      ]
     }
   },
 
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
-    validateForm1 () {
+    validate() {
       if (
           (this.lastname !== ''
               && this.firstname !== ''
               && this.phone !== ''
           )) return true
     },
-    List_Users () {
-      return this.$store.state.users
+    Users () {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      return this.users =this.$store.state.users
     },
   },
   methods: {
@@ -117,9 +91,9 @@ export default {
       this.phone = '';
     },
 
-
     submit() {
       const obj = {
+        id: this.$store.state.items + 1,
         firstname: this.firstname,
         lastname: this.lastname,
         phone: this.phone,
