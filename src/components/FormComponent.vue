@@ -14,10 +14,12 @@
       <div class="col-12 form-group">
         <label class="col-form-label col-form-label-lg">Phone<span class="text-danger">*</span></label>
         <vue-tel-input v-model="phone" class="form-control form-control-lg"></vue-tel-input>
-
+        <vs-alert :active="inputValid" color="danger" icon="new_releases" >
+          <span>Put a good <b>phone number</b></span>
+        </vs-alert>
       </div>
       <div class="flex flex-wrap items-center p-3" slot="footer">
-        <vs-button type="filled" icon="done" :disabled="!validate"   @click="submit" color="success" >Submit</vs-button>
+        <vs-button type="filled" icon="done" :disabled="!validate || inputValid"   @click="submit" color="success" >Submit</vs-button>
         <vs-button type="filled"  icon="cancel" class="ml-4"   @click="resetData" color="danger">Cancel</vs-button>
       </div>
     </div>
@@ -78,9 +80,11 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.users =this.$store.state.users
     },
+    inputValid(){
+      return !/\d+$/.test(this.phone) ;
+    },
   },
   methods: {
-
     resetData() {
       this.$vs.loading()
       setTimeout( ()=> {
@@ -99,6 +103,12 @@ export default {
         phone: this.phone,
       }
       this.$store.dispatch('addItem', obj)
+      this.$vs.notify({
+        color:'success',
+        icon:'done',
+        text:'save',
+        position:'top-right'
+      })
       this.resetData();
     }
   }
