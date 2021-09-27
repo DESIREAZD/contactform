@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-9 h-100 d-flex justify-content-center align-items-center">
           <div class="col-md-8 rounded px-5 py-4 shadow bg-white text-left">
-            <SignupForm />
+            <FormComponent />
           </div>
         </div>
       </div>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import SignupForm from './components/FormComponent'
+import FormComponent from './components/FormComponent'
 
 export default {
   name: 'App',
   components: {
-    SignupForm
+    FormComponent
   },
   mounted() {
     this.$vs.loading()
