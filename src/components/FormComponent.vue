@@ -4,16 +4,21 @@
       <div class="col-12 form-group">
         <label class="col-form-label col-form-label-lg">Last name <span class="text-danger">*</span></label>
         <input type="text" v-model="lastname"  class="form-control form-control-lg">
-        <div v-if="!lastname.required" class="invalid-feedback">The last name field is required.</div>
+        <vs-alert v-if="error_lastname" color="danger" icon="new_releases" >
+          <span>The last name field is required<b> maximum five characters. </b></span>
+        </vs-alert>
       </div>
       <div class="col-12 form-group">
         <label class="col-form-label col-form-label-lg"> First name <span class="text-danger">*</span></label>
         <input type="text" v-model="firstname"  class="form-control form-control-lg">
-        <div v-if="!firstname.required" class="invalid-feedback">The full name field is required.</div>
+        <vs-alert v-if="error_firstname" color="danger" icon="new_releases" >
+          <span>The first name field is required<b> maximum five characters. </b></span>
+
+        </vs-alert>
       </div>
       <div class="col-12 form-group">
         <label class="col-form-label col-form-label-lg">Phone<span class="text-danger">*</span></label>
-        <vue-tel-input v-model="phone" class="form-control form-control-lg"></vue-tel-input>
+        <vue-tel-input v-model="phone" validCharactersOnly ="true" class="form-control form-control-lg"></vue-tel-input>
         <vs-alert :active="inputValid" color="danger" icon="new_releases" >
           <span>Put a good <b>phone number</b></span>
         </vs-alert>
@@ -72,7 +77,7 @@ export default {
     // eslint-disable-next-line vue/return-in-computed-property
     validate() {
       if (
-          (this.lastname !== ''
+          (      this.lastname !== ''
               && this.firstname !== ''
               && this.phone !== ''
           )) return true
@@ -84,6 +89,12 @@ export default {
     inputValid(){
       return !/\d+$/.test(this.phone) ;
     },
+    error_lastname () {
+      return this.lastname.trim().length < 5
+    },
+    error_firstname () {
+      return this.firstname.trim().length < 5
+    }
   },
   methods: {
     resetData() {
