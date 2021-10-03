@@ -23,7 +23,7 @@
         </vs-alert>
       </div>
       <div class="flex flex-wrap items-center p-3" slot="footer">
-        <vs-button type="filled" icon="done" :disabled="!validate || inputValid || error_lastname || error_lastname " @click="submit" color="success" >Submit</vs-button>
+        <vs-button type="filled" icon="done" :disabled="!validate || inputValid || error_lastname || error_firstname " @click="submit" color="success" >Submit</vs-button>
         <vs-button type="filled"  icon="cancel" class="ml-4"   @click="resetData" color="danger">Cancel</vs-button>
       </div>
     </div>
