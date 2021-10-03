@@ -19,7 +19,7 @@ npm run build
 ```
 npm run lint
 ```
-### unit testing
+### Unit testing
 ```
 npm run test:unit
 
